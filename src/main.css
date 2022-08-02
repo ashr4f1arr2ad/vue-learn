@@ -1,3 +1,24 @@
 /* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
+
+.light {
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.light .ant-form-item-label label {
+    transition: 0.4s;
+}
+
+.dark {
+    background: #192734;
+    color: #f3f3f3;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.dark .ant-form-item-label label {
+    color: #fff;
+    transition: 0.4s;
+}

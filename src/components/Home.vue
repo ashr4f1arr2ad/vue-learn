@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <span :class="mode === 'dark' ? 'text-white' : ''">fdsf</span>
+        <!-- <span :class="mode === 'dark' ? 'text-white' : ''">fdsf</span> -->
         <div class="form">
             <a-form
                 :model="formState"
@@ -79,4 +79,6 @@ export default {
 
 <style lang="scss" scoped>
     @import "style.module.scss";
+
+    
 </style>
