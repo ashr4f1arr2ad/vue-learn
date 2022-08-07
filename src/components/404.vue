@@ -1,17 +1,17 @@
 <template>
-    <div class="about">
-        <h1>Works Better Way</h1>
+    <div class="not-found">
+        <h1>404</h1>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'About'
+        name: 'Error_Page'
     }
 </script>
 
 <style lang="scss" scoped>
-    .about {
+    .not-found {
         height: calc(100vh - 39px);
         width: 100%;
         display: flex;
@@ -21,7 +21,7 @@
 
     .dark {
 
-        .about {
+        .not-found {
 
             h1 {
                 color: #fff;

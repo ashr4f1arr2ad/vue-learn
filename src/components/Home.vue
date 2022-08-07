@@ -9,11 +9,11 @@
                 @finishFailed="onFinishFailed"
                 >
                 <a-form-item
-                    label="Username"
-                    name="username"
+                    label="Email"
+                    name="email"
                     :rules="[{ required: true, message: 'Please input your username!' }]"
                 >
-                    <a-input v-model:value="formState.username" />
+                    <a-input v-model:value="formState.email" />
                 </a-form-item>
     
                 <a-form-item
@@ -35,11 +35,18 @@
 <script>
 import { useStore } from 'vuex';
 import { computed } from 'vue';
+import axios from 'axios';
+import Auth from '../Auth/auth';
 
 const formState = {
-  username: '',
+  email: '',
   password: '',
 }
+
+const { setToken, getToken, getCSRFToken } = Auth();
+
+const token = getToken();
+const csrf_token = getCSRFToken();
 
 export default {
     name: 'Home',
@@ -48,16 +55,33 @@ export default {
     },
     data: function() {
         return {
-        formState
+            formState
         }
     },
     methods: {
         onFinish(values) {
-        console.log('Success:', values);
+            // console.log(values);
+            // console.log(getCSRFToken());
+            // console.log(getToken());
+            const config = {
+                headers: {
+                    "Content-type" : "application/json",
+                    Authorization : `Bearer ${token ? token : 'Null'}`,
+                    // "CSRF-TOKEN" : `${csrf_token ? csrf_token : 'Null'}`
+                }
+            };
+            axios.post('http://127.0.0.1:8000/api/auth/login', values, config).then((res) => {
+                // console.log(res);
+                // console.log(res.data);
+                setToken(res);
+            })
         },
         onFinishFailed(errorInfo) {
-        console.log('Failed:', errorInfo);
-        }
+            console.log('Failed:', errorInfo);
+        },
+    },
+    mounted() {
+        
     },
     //Using composition API to get state from vuex
     // setup() {
@@ -79,6 +103,4 @@ export default {
 
 <style lang="scss" scoped>
     @import "style.module.scss";
-
-    
 </style>
